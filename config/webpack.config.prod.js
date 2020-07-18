@@ -5,6 +5,7 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const path = require('path');
 
 module.exports = webpackMerge.smart(baseConfig, {
   output: {
@@ -18,30 +19,8 @@ module.exports = webpackMerge.smart(baseConfig, {
     rules: [
       {
         test: /\.s(a|c)ss$/,
-        exclude: /style/,
         use: [
-          'style-loader',
-          'css-modules-typescript-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[hash:base64]',
-              },
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: { sourceMap: true, config: { path: 'postcss.config.js' } },
-          },
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.s(a|c)ss$/,
-        include: /style/,
-        use: [
-          'style-loader',
+          MiniCSSExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -54,7 +33,7 @@ module.exports = webpackMerge.smart(baseConfig, {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          MiniCSSExtractPlugin.loader,
           {
             loader: 'postcss-loader',
             options: { sourceMap: true, config: { path: 'postcss.config.js' } },
@@ -84,7 +63,6 @@ module.exports = webpackMerge.smart(baseConfig, {
     new BundleAnalyzerPlugin(),
   ],
   optimization: {
-    usedExports: true,
     splitChunks: {
       cacheGroups: {
         commons: {

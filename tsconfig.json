@@ -4,8 +4,6 @@
     "target": "es6",
     "module": "ES2015",
     "allowJs": true,
-    "jsx": "react",
-    "jsxFactory": "React.createElement",
     "isolatedModules": true,
     "strict": true,
     "moduleResolution": "node",

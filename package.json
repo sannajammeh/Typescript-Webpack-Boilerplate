@@ -1,7 +1,6 @@
 {
-  "name": "react-preact-typescript-webpack-boilerplate",
+  "name": "typescript-boilerplate",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.config.dev.js --open",
@@ -9,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sannajammeh/React-Preact-Typescript-Webpack-Boilerplate.git"
+    "url": "git+https://github.com/sannajammeh/Typescript-Webpack-Boilerplate.git"
   },
   "keywords": [],
   "author": "Sanna Jammeh",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sannajammeh/React-Preact-Typescript-Webpack-Boilerplate/issues"
+    "url": "https://github.com/sannajammeh/Typescript-Webpack-Boilerplate/issues"
   },
-  "homepage": "https://github.com/sannajammeh/React-Preact-Typescript-Webpack-Boilerplate#readme",
+  "homepage": "https://github.com/sannajammeh/Typescript-Webpack-Boilerplate#readme",
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/plugin-transform-react-jsx": "^7.10.3",
@@ -31,6 +30,7 @@
     "cross-env": "^7.0.2",
     "css-loader": "^3.6.0",
     "css-modules-typescript-loader": "^4.0.0",
+    "ejs-compiled-loader": "^3.0.0",
     "file-loader": "^6.0.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
@@ -45,6 +45,7 @@
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2"
   },

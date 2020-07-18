@@ -1,8 +1,14 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const config = require('./app.config.json');
 const path = require('path');
 
 module.exports = {
   entry: path.resolve(process.cwd(), 'src', 'index'),
+  // entry: {
+  //   app: path.resolve(process.cwd(), 'src', 'app'),
+  //   PAGE_2: path.resolve(process.cwd(), 'src', 'PAGE_2'),
+  // },
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
@@ -10,23 +16,19 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
-    // alias: {
-    //   react: 'preact/compat',
-    //   'react-dom': 'preact/compat',
-    // },
+    extensions: ['.js', '.ts'],
   },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts$/,
         use: ['babel-loader', 'ts-loader'],
         exclude: /node_modules/,
       },
-      {
-        test: /\.html/,
-        use: ['html-loader'],
-      },
+      // {
+      //   test: /\.html/,
+      //   use: ['html-loader'],
+      // },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
@@ -43,6 +45,15 @@ module.exports = {
         test: /\.svg$/,
         use: 'file-loader',
       },
+      {
+        test: /\.ejs$/,
+        use: {
+          loader: 'ejs-compiled-loader',
+          options: {
+            htmlmin: false,
+          },
+        },
+      },
     ],
   },
   plugins: [
@@ -53,10 +64,20 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: path.resolve(process.cwd(), 'public', 'index.html'),
+      hash: true,
+      // filename: 'index.html', //Un-comment if MPA
+      template: path.resolve(process.cwd(), 'src', 'views', 'index.ejs'),
       templateParameters: {
         TITLE: config.title,
       },
+      // chunks: ['vendor', 'app'], //Un-comment if MPA
     }),
+    // new HtmlWebpackPlugin({
+    //   hash: true,
+    //   filename: 'PAGE_2.html',
+    //   title: 'PAGE 2',
+    //   template: path.resolve(process.cwd(), 'src', 'views', 'PAGE_2.html'),
+    //   chunks: ['vendor', 'PAGE_2_BUNDLE'],
+    // }), //Un-comment if MPA
   ],
 };
